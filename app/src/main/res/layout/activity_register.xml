@@ -1,9 +1,50 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".RegisterActivity">
 
-</androidx.constraintlayout.widget.ConstraintLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:orientation="vertical">
+
+        <EditText
+            android:id="@+id/regEmailET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="email"
+            android:inputType="textEmailAddress"/>
+        <EditText
+            android:id="@+id/regFelhnevET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Felhasznalo nev"/>
+        <EditText
+            android:id="@+id/regPassET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="jelszo"
+            android:inputType="textPassword"/>
+        <EditText
+            android:id="@+id/regFullNameET"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Teljes nev"/>
+
+        <Button
+            android:id="@+id/regBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Regisztracio"/>
+        <Button
+            android:id="@+id/backFromRegBtn"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Vissza"/>
+    </LinearLayout>
+
+</RelativeLayout>
