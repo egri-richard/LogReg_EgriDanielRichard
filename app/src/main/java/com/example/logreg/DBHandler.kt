@@ -44,4 +44,49 @@ class DBHandler(var context: Context) : SQLiteOpenHelper(context, DATABASE_NAME,
             Toast.makeText(context, "Sikeres feltoltes", Toast.LENGTH_SHORT).show()
         }
     }
+
+    fun getUsers(): MutableList<User> {
+        val list: MutableList<User> = ArrayList()
+        val db = this.readableDatabase
+        val query = "SELECT * FROM $TABLE_NAME"
+        val result = db.rawQuery(query, null)
+
+        if (result.moveToFirst()) {
+            do {
+                val u = User(   result.getString(result.getColumnIndex(COL_EMAIL)),
+                                result.getString(result.getColumnIndex(COL_USERNAME)),
+                                result.getString(result.getColumnIndex(COL_PASSWORD)),
+                                result.getString(result.getColumnIndex(COL_FULLNAME)))
+                list.add(u)
+            } while (result.moveToNext())
+        }
+
+        result.close()
+        db.close()
+        return list
+    }
+
+    fun containsUsername(username: String): Boolean {
+        var retBool = false
+        val list = this.getUsers()
+
+        for (user in list) {
+            if (user.felhnev.equals(username)) {
+                retBool = true
+            }
+        }
+        return retBool
+    }
+
+    fun containsEmail(email: String): Boolean {
+        var retBool = false
+        val list = this.getUsers()
+
+        for (user in list) {
+            if (user.email.equals(email)) {
+                retBool = true
+            }
+        }
+        return retBool
+    }
 }
