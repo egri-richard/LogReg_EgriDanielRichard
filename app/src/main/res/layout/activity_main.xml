@@ -30,12 +30,14 @@
             android:orientation="horizontal">
 
             <Button
+                android:id="@+id/logInBtn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:layout_margin="3dp"
                 android:text="Bejelentkezes"/>
             <Button
+                android:id="@+id/regBtn"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
@@ -43,7 +45,5 @@
                 android:text="Regisztracio"/>
         </LinearLayout>
     </LinearLayout>
-
-
 
 </RelativeLayout>
