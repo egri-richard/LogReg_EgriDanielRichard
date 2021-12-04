@@ -22,4 +22,6 @@ class User {
         this.teljnev = teljnev
     }
 
+    constructor()
+
 }
