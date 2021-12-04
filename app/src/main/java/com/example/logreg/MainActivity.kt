@@ -6,6 +6,7 @@ import android.os.Bundle
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
+import kotlin.reflect.typeOf
 
 class MainActivity : AppCompatActivity() {
     private lateinit var logInText: EditText
@@ -26,8 +27,10 @@ class MainActivity : AppCompatActivity() {
         logInBtn.setOnClickListener {
             val db = DBHandler(this)
             if (logInText.text.isNotEmpty() && logInPass.text.isNotEmpty()) {
-                if (checkLogin()) {
-                    startActivity(Intent(applicationContext, LoggedInActivity::class.java))
+                if (checkLogin() is User) {
+                    val intent = Intent(applicationContext, LoggedInActivity::class.java)
+                    intent.putExtra("fullName", checkLogin()?.teljnev.toString())
+                    startActivity(intent)
                     finish()
                 } else {
                     Toast.makeText(applicationContext, "This user doesn't exist", Toast.LENGTH_SHORT).show()
@@ -38,18 +41,18 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
-    private fun checkLogin(): Boolean {
-        var valid = false
+    private fun checkLogin() : User? {
+        var retval: User? = null
         val db = DBHandler(this)
-        val Users = db.getUsers()
+        val users = db.getUsers()
 
-        for (user in Users) {
+        for (user in users) {
             if (logInText.text.toString().equals(user.felhnev) && logInPass.text.toString().equals(user.jelszo)) {
-                valid = true
+                retval = user
             }
         }
 
-        return valid
+        return retval
     }
 
     private fun init() {
