@@ -4,6 +4,8 @@ import android.content.Intent
 import android.graphics.Color
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.animation.Animation
+import android.view.animation.AnimationUtils
 import android.widget.Button
 import android.widget.EditText
 import android.widget.Toast
@@ -62,20 +64,24 @@ class RegisterActivity : AppCompatActivity() {
 
     private fun validation() : Boolean {
         var retBool = true
+        val shake: Animation = AnimationUtils.loadAnimation(this, R.anim.shake)
 
         //email validation
         val emailText = regEmailET.text.toString()
         if (!emailText.contains(".")) {
             retBool = false
             Toast.makeText(applicationContext, "Wrong email format", Toast.LENGTH_SHORT).show()
+            regEmailET.startAnimation(shake)
             return retBool
         } else if(!emailText.contains("@")) {
             retBool = false
             Toast.makeText(applicationContext, "Wrong email format", Toast.LENGTH_SHORT).show()
+            regEmailET.startAnimation(shake)
             return retBool
         } else if (db.containsEmail(emailText)) {
             retBool = false
             Toast.makeText(applicationContext, "This email is already in use", Toast.LENGTH_SHORT).show()
+            regEmailET.startAnimation(shake)
             return retBool
         }
 
@@ -84,6 +90,7 @@ class RegisterActivity : AppCompatActivity() {
         if (db.containsUsername(uName)) {
             retBool = false
             Toast.makeText(applicationContext, "This username already exists", Toast.LENGTH_SHORT).show()
+            regFelhnevET.startAnimation(shake)
             return retBool
         }
 
@@ -95,12 +102,14 @@ class RegisterActivity : AppCompatActivity() {
                 if (!word.first().isUpperCase()) {
                     retBool = false
                     Toast.makeText(applicationContext, "Your name must start with a capital letter", Toast.LENGTH_SHORT).show()
+                    regFullNameET.startAnimation(shake)
                     return retBool
                 }
             }
         } else {
             retBool = false
             Toast.makeText(applicationContext, "Your must write in your full name", Toast.LENGTH_SHORT).show()
+            regFullNameET.startAnimation(shake)
             return retBool
         }
 
