@@ -71,8 +71,10 @@ class MainActivity : AppCompatActivity() {
         val users = db.getUsers()
 
         for (user in users) {
+            val temp = db.decrypt(user.ivParameterSpec, user.jelszo)
+
             if ((logInText.text.toString().equals(user.felhnev) || logInText.text.toString().equals(user.email)) &&
-                logInPass.text.toString().equals(user.jelszo)) {
+                logInPass.text.toString().equals(temp)) {
                 return user
             }
         }

@@ -54,9 +54,8 @@ class RegisterActivity : AppCompatActivity() {
                 db.insert(User(
                     regEmailET.text.toString(),
                     regFelhnevET.text.toString(),
-                    regPassET.text.toString(),
                     regFullNameET.text.toString()
-                ))
+                ), regPassET.text.toString())
             }
         }
     }
